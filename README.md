@@ -11,6 +11,46 @@ This repository contains the capstone projects for the Object-Oriented Programmi
 * Object-Oriented Programming (Encapsulation, Inheritance, Polymorphism, Abstraction)
 * File-Based Database (`.txt`)
 
+## 🏗 System Architecture
+```mermaid
+classDiagram
+    class BankSystem {
+        +Login()
+        +ShowMainMenu()
+        +ManageUsers()
+        +ManageClients()
+        +Transactions()
+    }
+    class ATMSystem {
+        +QuickWithdraw()
+        +NormalWithdraw()
+        +Deposit()
+        +CheckBalance()
+    }
+    class Client {
+        -AccountNumber: string
+        -PinCode: string
+        -Name: string
+        -AccountBalance: double
+        +Deposit(amount)
+        +Withdraw(amount)
+        +Transfer(amount, destination)
+    }
+    class User {
+        -Username: string
+        -Password: string
+        -Permissions: int (Bitmask)
+        +CheckAccess(permissionFlag)
+    }
+    
+    BankSystem "1" *-- "many" Client : Manages
+    BankSystem "1" *-- "many" User : Manages
+    ATMSystem "1" *-- "many" Client : Authenticates & Updates
+    
+    Client ..> "Clients.txt" : Custom Serialization (#//#)
+    User ..> "Users.txt" : Custom Serialization (#//#)
+```
+
 ## 🚀 Projects Included
 
 ### 1. Advanced Bank System (`Bank-System/`)
