@@ -47,8 +47,8 @@ classDiagram
     BankSystem "1" *-- "many" User : Manages
     ATMSystem "1" *-- "many" Client : Authenticates & Updates
     
-    Client ..> "Clients.txt" : Custom Serialization (#//#)
-    User ..> "Users.txt" : Custom Serialization (#//#)
+    Client ..> Clients_txt : Custom Serialization
+    User ..> Users_txt : Custom Serialization
 ```
 
 ## 🚀 Projects Included
