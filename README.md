@@ -17,20 +17,24 @@ The applications do not use classes. Instead, data structures are passed to glob
 
 ## Compilation and Execution
 
-You can compile the projects using a standard C++ compiler like `g++`.
+A `Makefile` is provided at the repository root to compile both applications:
 
-### 1. Bank System
 ```bash
-cd Bank-System
-g++ "Project Solution.cpp" -o BankSystem
-./BankSystem
-```
+# Build both Bank and ATM applications into bin/
+make
 
-### 2. ATM System
-```bash
-cd ATM-System
-g++ Project2.cpp -o ATMSystem
-./ATMSystem
+# Run the Bank System
+./bin/bank_system
+
+# Run the ATM System
+./bin/atm_system
+
+# Build individually
+make bank
+make atm
+
+# Clean build artifacts
+make clean
 ```
 
 ## Included Projects
