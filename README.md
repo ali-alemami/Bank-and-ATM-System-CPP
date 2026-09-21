@@ -1,66 +1,48 @@
-# Bank & ATM System (C++)
+# Bank and ATM System (C++)
 
-This repository contains the capstone projects for the Object-Oriented Programming (OOP) track at **Programming Advices**. It features a robust, fully-functional Bank System and an accompanying ATM System simulator.
+This repository contains two projects from the Object-Oriented Programming track at Programming Advices. While the course covers OOP concepts, this specific implementation is written in procedural C++ using structs and global functions, rather than classes.
 
-## 📚 Courses
+## Courses
 * [OOP Concepts](https://programmingadvices.com/p/oop-as-it-should-be-concepts)
 * [OOP Applications](https://programmingadvices.com/p/11-oop-as-it-should-be-applications)
 
-## 🛠 Technologies
-* **C++**
-* Object-Oriented Programming (Encapsulation, Inheritance, Polymorphism, Abstraction)
-* File-Based Database (`.txt`)
+## Architecture and Technologies
+* **C++**: Implemented using procedural programming.
+* **Data Structures**: Uses `struct` (`stUser`, `stClient`) to model data entities.
+* **Standard Template Library (STL)**: Utilizes `std::vector` for loading and managing records in memory, and `std::string` for text manipulation.
+* **File I/O**: Uses `<fstream>` to persist data to text files (`Clients.txt` and `Users.txt`).
+* Data fields are serialized and deserialized into text files using a string delimiter (`#//#`).
 
-## 🏗 System Architecture
-```mermaid
-classDiagram
-    class BankSystem {
-        +Login()
-        +ShowMainMenu()
-        +ManageUsers()
-        +ManageClients()
-        +Transactions()
-    }
-    class ATMSystem {
-        +QuickWithdraw()
-        +NormalWithdraw()
-        +Deposit()
-        +CheckBalance()
-    }
-    class Client {
-        -AccountNumber: string
-        -PinCode: string
-        -Name: string
-        -AccountBalance: double
-        +Deposit(amount)
-        +Withdraw(amount)
-        +Transfer(amount, destination)
-    }
-    class User {
-        -Username: string
-        -Password: string
-        -Permissions: int (Bitmask)
-        +CheckAccess(permissionFlag)
-    }
-    
-    BankSystem "1" *-- "many" Client : Manages
-    BankSystem "1" *-- "many" User : Manages
-    ATMSystem "1" *-- "many" Client : Authenticates & Updates
-    
-    Client ..> Clients_txt : Custom Serialization
-    User ..> Users_txt : Custom Serialization
+The applications do not use classes. Instead, data structures are passed to global functions that handle screen rendering, file reading/writing, and business logic.
+
+## Compilation and Execution
+
+You can compile the projects using a standard C++ compiler like `g++`.
+
+### 1. Bank System
+```bash
+cd Bank-System
+g++ "Project Solution.cpp" -o BankSystem
+./BankSystem
 ```
 
-## 🚀 Projects Included
+### 2. ATM System
+```bash
+cd ATM-System
+g++ Project2.cpp -o ATMSystem
+./ATMSystem
+```
 
-### 1. Advanced Bank System (`Bank-System/`)
-A 1,500+ line C++ application featuring:
-* **Custom Serialization:** Custom string parsers (`SplitString`) and delimiters (`#//#`) to save/load vector data into a text-based database (`Clients.txt` & `Users.txt`).
-* **Access Control:** Engineered a bitmask-based permissions system (flags: 1, 2, 4, 8, etc.) to store and evaluate user roles and access rights.
-* **Full CRUD Operations:** Add, Update, Delete, and Find functionalities for both Bank Clients and System Users.
-* **Transactions:** Deposit, Withdraw, and Transfer functionalities that automatically update system logs.
+## Included Projects
 
-### 2. ATM Machine Simulator (`ATM-System/`)
-A multi-tier ATM application interfacing directly with the Bank's `Clients.txt` data structure:
-* **Authentication:** Secure ATM login verifying Account Number and PIN via in-memory vector iteration.
-* **Core Functions:** Quick Withdraw, Normal Withdraw, Deposit, and real-time Balance Checking.
+### Bank System
+Located in `Bank-System/`, this application manages bank clients and internal system users.
+* Uses custom string parsing to save and load vector data into text files.
+* Implements a bitmask permissions system (using flags such as 1, 2, 4, 8) to evaluate user access rights.
+* Provides Create, Read, Update, and Delete operations for client and user records.
+* Includes transaction functions for deposits, withdrawals, and balance updates.
+
+### ATM Machine Simulator
+Located in `ATM-System/`, this application interfaces with the `Clients.txt` data structure.
+* Authenticates users by verifying the Account Number and PIN against records loaded in memory.
+* Provides functions for quick withdrawal, normal withdrawal, deposits, and checking account balances.
